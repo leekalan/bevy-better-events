@@ -1,6 +1,8 @@
+use bevy::prelude::Resource;
+
 use super::{relay_handle::RelayHandle, Relay};
 
-pub fn relay_cleanup<R: Relay>(mut relay: RelayHandle<R>) {
+pub fn relay_cleanup<R: Relay + Resource>(mut relay: RelayHandle<R>) {
     relay.clear();
 }
 

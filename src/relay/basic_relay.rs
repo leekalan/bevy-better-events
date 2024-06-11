@@ -5,17 +5,17 @@ use super::{
 };
 
 #[derive(Resource)]
-pub struct BasicRelay<D: Resource> {
+pub struct BasicRelay<D> {
     data: Option<D>,
 }
 
-impl<D: Resource> Default for BasicRelay<D> {
+impl<D> Default for BasicRelay<D> {
     fn default() -> Self {
         Self { data: None }
     }
 }
 
-impl<D: Resource> Relay for BasicRelay<D> {
+impl<D> Relay for BasicRelay<D> {
     type Data = D;
 
     fn post(&mut self, data: Self::Data) -> Result<(), Self::Data> {
@@ -44,6 +44,16 @@ pub type BasicRelayHandle<'w, D> = RelayHandle<'w, BasicRelay<D>>;
 
 pub type BasicRelaySurvey<'w, D> = RelaySurvey<'w, BasicRelay<D>>;
 
-pub fn basic_relay_cleanup<T: Resource>(relay: BasicRelayHandle<T>) {
-    relay_cleanup::<BasicRelay<T>>(relay)
+pub fn basic_relay_cleanup<D>(relay: BasicRelayHandle<D>)
+where
+    BasicRelay<D>: Resource,
+{
+    relay_cleanup::<BasicRelay<D>>(relay)
+}
+
+pub fn on_basic_relay<D>() -> impl FnMut(BasicRelaySurvey<D>) -> bool + Clone
+where
+    BasicRelay<D>: Resource,
+{
+    |reader: BasicRelaySurvey<D>| reader.survey().is_some()
 }

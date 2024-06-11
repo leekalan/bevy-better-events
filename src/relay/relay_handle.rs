@@ -3,11 +3,11 @@ use bevy::{ecs::system::SystemParam, prelude::*};
 use super::Relay;
 
 #[derive(SystemParam)]
-pub struct RelayHandle<'w, R: Relay> {
-    relay: ResMut<'w, R>,
+pub struct RelayHandle<'w, R: Relay + Resource> {
+    pub(super) relay: ResMut<'w, R>,
 }
 
-impl<'a, R: Relay> RelayHandle<'a, R> {
+impl<'a, R: Relay + Resource> RelayHandle<'a, R> {
     pub fn post(&mut self, data: R::Data) -> Result<(), R::Data> {
         self.relay.post(data)
     }
