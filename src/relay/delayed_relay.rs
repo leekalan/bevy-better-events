@@ -1,7 +1,7 @@
 //! # DelayedRelay
-//! 
+//!
 //! `DelayedRelay<R>` is a Relay that hides the posted value from everything until it is enabled
-//! 
+//!
 //! Useful for a relay that is meant to be surveyed by multiple systems
 
 use bevy::prelude::*;

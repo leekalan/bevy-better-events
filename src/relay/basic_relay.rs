@@ -1,7 +1,7 @@
 //! # BasicRelay
-//! 
+//!
 //! Basic relay that holds a posted value until it is recieved
-//! 
+//!
 //! Useful for simple communication between systems
 
 use bevy::prelude::*;

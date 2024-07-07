@@ -1,7 +1,7 @@
 //! # TimedRelay
-//! 
+//!
 //! `TimedRelay<R, T>` is a Relay that lasts through `T` cleanup cycles.
-//! 
+//!
 //! Useful for simple communication between systems that do not always run
 
 use bevy::prelude::*;
