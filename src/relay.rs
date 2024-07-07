@@ -4,7 +4,8 @@ pub mod relay_handle;
 pub mod relay_survey;
 
 pub mod basic_relay;
-pub mod mut_relay;
+pub mod delayed_relay;
+pub mod timed_relay;
 
 pub trait Relay {
     type Data;

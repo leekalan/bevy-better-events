@@ -4,7 +4,7 @@ use super::Relay;
 
 #[derive(SystemParam)]
 pub struct RelaySurvey<'w, R: Relay + Resource> {
-    relay: Res<'w, R>,
+    pub(super) relay: Res<'w, R>,
 }
 
 impl<'a, R: Relay + Resource> RelaySurvey<'a, R> {

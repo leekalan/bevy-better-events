@@ -1,7 +1,14 @@
+//! # BasicRelay
+//! 
+//! Basic relay that holds a posted value until it is recieved
+//! 
+//! Useful for simple communication between systems
+
 use bevy::prelude::*;
 
 use super::{
-    relay_cleanup::relay_cleanup, relay_handle::RelayHandle, relay_survey::RelaySurvey, Relay,
+    on_relay::on_relay, relay_cleanup::relay_cleanup, relay_handle::RelayHandle,
+    relay_survey::RelaySurvey, Relay,
 };
 
 #[derive(Resource)]
@@ -48,12 +55,12 @@ pub fn basic_relay_cleanup<D>(relay: BasicRelayHandle<D>)
 where
     BasicRelay<D>: Resource,
 {
-    relay_cleanup::<BasicRelay<D>>(relay)
+    relay_cleanup(relay)
 }
 
-pub fn on_basic_relay<D>() -> impl FnMut(BasicRelaySurvey<D>) -> bool + Clone
+pub fn on_basic_relay<D>(relay: BasicRelaySurvey<D>) -> bool
 where
     BasicRelay<D>: Resource,
 {
-    |reader: BasicRelaySurvey<D>| reader.survey().is_some()
+    on_relay(relay)
 }

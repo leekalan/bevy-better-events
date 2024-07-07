@@ -8,6 +8,7 @@ pub fn relay_cleanup<R: Relay + Resource>(mut relay: RelayHandle<R>) {
 
 #[cfg(test)]
 mod tests {
+    #![allow(unused)]
     use bevy::prelude::*;
 
     use crate::relay::basic_relay::{basic_relay_cleanup, BasicRelay, BasicRelayHandle};
